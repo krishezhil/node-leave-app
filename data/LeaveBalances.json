@@ -1,0 +1,14 @@
+[
+    {
+        "leaveType": "CL",
+        "leaveBalance": 12
+    },
+    {
+        "leaveType": "SL",
+        "leaveBalance": 12
+    },
+    {
+        "leaveType": "EL",
+        "leaveBalance": 12
+    }
+]

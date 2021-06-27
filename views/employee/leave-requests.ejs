@@ -1,0 +1,65 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../includes/header.ejs') %>
+
+            <main>
+                <% if (prods.length> 0) {%>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">From Date</th>
+                                <th scope="col">To Date</th>
+                                <th scope="col">No Of Days</th>
+                                <th scope="col">Leave Type</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Reason</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <% for (let leave of prods) {%>
+                            <tbody>
+                                <tr>
+                                    <td scope="row">
+                                        <%= leave.id %>
+                                    </td>
+                                    <td scope="row">
+                                        <%= leave.fromDate %>
+                                    </td>
+                                    <td scope="row">
+                                        <%= leave.toDate %>
+                                    </td>
+                                    <td scope="row">
+                                        <%= leave.noOfDays %>
+                                    </td>
+                                    <td scope="row">
+                                        <%= leaveTypes.filter(lt=> lt.id === leave.LeaveTypeId)[0].leaveType %>
+                                    </td>
+                                    <td scope="row">
+                                        <%= leaveReqStatus.filter(lrs=> lrs.id ===
+                                            leave.LeaveRequestStatusId)[0].statusType %>
+                                    </td>
+                                    <td scope="row">
+                                        <%= leave.reason %>
+                                    </td>
+                                    <td>
+                                        <a href="/employee/leave-detail/<%= leave.id %>" class="btn">Details</a>
+                                        <a href="/employee/delete-leave/<%= leave.id %>" class="btn">Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <% }%>
+                    </table>
+                    <form action="/employee/create-leave" method="GET">
+                        <button class="btn btn-outline-primary">New Request</button>
+                    </form>
+
+                    <% } else {%>
+                        <h1>No Leave Requests Found!</h1>
+                        <% } %>
+
+            </main>
+
+            <%- include('../includes/end.ejs') %>

@@ -1,0 +1,65 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../includes/header.ejs') %>
+
+            <main>
+                <% if (errorMessage) { %>
+                    <div class="user-message user-message--error">
+                        <%= errorMessage %>
+                    </div>
+                    <% } %>
+                        <form class="product-form"
+                            action="/employee/<% if (editMode) { %>edit-leave<% } else { %>add-leave<% } %>"
+                            method="POST">
+                            <div class="form-control">
+                                <input type="hidden" name="id" value="<% if (editMode) { %><%= leaveReq.id %><% } %>">
+
+                                <label for="fromDate">From Date</label>
+                                <input type="date" name="fromDate" id="fromDate"
+                                    value="<% if (editMode || hasError) { %><%= leaveReq.fromDateSelected %><% } %>" />
+
+                                <label for="toDate">To Date</label>
+                                <input type="date" name="toDate" id="toDate"
+                                    value="<% if (editMode || hasError) { %><%= leaveReq.toDateSelected %><% } %>" />
+
+                                <label for="selectLeaveType">LeaveType:</label>
+                                <select name="selectLeaveType" id="selectLeaveType">
+                                    <% if (editMode || hasError) {%>
+                                        <% leaveTypes.forEach((leaveType)=> { %>
+                                            <option value="<%= leaveType.id %>"
+                                                <%=leaveType.leaveType===leaveTypeSelected ? 'selected' : '' %>>
+                                                <%=leaveType.leaveType %>
+                                            </option>
+                                            <% }) } else{ %>
+                                                <% leaveTypes.forEach((leaveType)=> { %>
+                                                    <option value="<%= leaveType.id %>">
+                                                        <%=leaveType.leaveType %>
+                                                    </option>
+                                                    <% }) }%>
+                                </select>
+
+                                <label for="reason">Reason</label>
+                                <input type="text" name="reason" id="reason"
+                                    value="<% if (editMode || hasError) { %><%= leaveReq.reason %><% } %>" />
+
+                            </div>
+                            <!-- <div class="col-sm-2">
+                            <label for="isHalfDay">is Half Day</label>
+                            <input type="checkbox" name="isHalfDay" id="isHalfDay"
+                                value="<% if (editMode) { %><%= leaveReq.isHalfDay %><% } %>" />
+                        </div> -->
+                            <div class="centered">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <%= editMode ? 'Update Request' : 'Create Request' %>
+                                </button>
+
+                            </div>
+                        </form>
+            </main>
+
+            </html>

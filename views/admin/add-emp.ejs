@@ -1,0 +1,44 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../includes/header.ejs') %>
+
+            <main>
+                <% if (errorMessage) { %>
+                    <div class="user-message user-message--error">
+                        <%= errorMessage %>
+                    </div>
+                    <% } %>
+                        <form class="product-form" action="/admin/add-emp" method="POST" novalidate>
+                            <div class="form-control">
+                                <label for="empNo">Emp No</label>
+                                <input type="text" name="empNo" id="empNo" value="<%= oldInputData.empNo%>" />
+
+                                <label for="password">Temp Password</label>
+                                <input type="password" name="password" id="password"
+                                    value="<%= oldInputData.password%>" />
+
+                                <label for="name">Emp Name</label>
+                                <input type="text" name="name" id="name" value="<%= oldInputData.name%>" />
+
+                                <label for="lastName">Last Name</label>
+                                <input type="text" name="lastName" id="lastName" value="<%= oldInputData.lastName%>" />
+
+                                <label for="email">email</label>
+                                <input type="email" name="email" id="email" value="<%= oldInputData.email%>" />
+
+                                <label for="doj">Date of Join</label>
+                                <input type="date" name="doj" id="doj" value="<%= oldInputData.dateOfJoin%>" />
+
+                            </div>
+                            <div>
+                                <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                                <button class="btn btn-outline-primary" type="submit">Submit</button>
+                            </div>
+                        </form>
+            </main>
+
+            <%- include('../includes/end.ejs') %>

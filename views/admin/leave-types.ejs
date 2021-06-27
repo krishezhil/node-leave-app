@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../includes/header.ejs') %>
+
+            <main>
+                <% if (prods.length> 0) {%>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Leave Types</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Created Date</th>
+
+                            </tr>
+                        </thead>
+                        <% for (let leave of prods) {%>
+                            <tbody>
+                                <tr>
+                                    <td scope="row">
+                                        <%= leave.id %>
+                                    </td>
+                                    <td scope="row">
+                                        <%= leave.leaveType %>
+                                    </td>
+                                    <td scope="row">
+                                        <%= leave.leaveDesc %>
+                                    </td>
+
+                                    <td scope="row">
+                                        <%= leave.createdAt %>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                            <% }%>
+                    </table>
+                    <% } else {%>
+                        <h1>No Leave Balances Found!</h1>
+                        <% } %>
+            </main>
+
+            <%- include('../includes/end.ejs') %>

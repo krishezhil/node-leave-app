@@ -1,0 +1,52 @@
+<header class="main-header">
+    <nav class="main-header__nav">
+        <ul class="main-header__item-list">
+            <li class="main-header__item">
+                <a class="<%= path === '/' ? 'active' : '' %>" href="/">Dashboard</a>
+            </li>
+            <% if (isAuthenticated) { %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/admin/add-leave-type' ? 'active' : '' %>" href="/admin/add-leave-type">Add
+                        LeaveType</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/admin/leave-types' ? 'active' : '' %>" href="/admin/leave-types">Leave
+                        Types</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/admin/add-emp' ? 'active' : '' %>" href="/admin/add-emp">Add
+                        Employee</a>
+                </li>
+                <!-- <li class="main-header__item">
+                <a class="<%= path === '/emp/leave-balances' ? 'active' : '' %>" href="/employee/leave-balances">Leave
+                    Balances</a>
+            </li>-->
+
+                <li class="main-header__item">
+                    <a class="<%= path === '/emp/leave-requests' ? 'active' : '' %>"
+                        href="/employee/leave-requests">Leave
+                        Requests</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/emp/create-leave' ? 'active' : '' %>" href="/employee/create-leave">Create
+                        Request</a>
+                </li>
+                <%}%>
+        </ul>
+        <ul class="main-header__item-list">
+            <% if (!isAuthenticated) { %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
+                </li>
+                <%}else{%>
+                    <li class="main-header__item">
+
+                        <form action="/logout" method="POST">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                    <%}%>
+        </ul>
+    </nav>
+</header>
